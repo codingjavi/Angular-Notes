@@ -1,0 +1,68 @@
+<div class='card'>
+  <div class='card-header'>
+    {{pageTitle}}
+  </div>
+  <div class='card-body'>
+    <div class='row'> <!-- Twitter boostrap to layout input box and text into rows-->
+      <div class='col-md-2'>Filter by:</div>
+      <div class='col-md-4'> <!--where asking input for what to filter by-->
+        <input type='text'
+              [(ngModel)]='listFilter'/> <!--storing USER INPUT in listFiler property, need TO IMPORT FORMS MODULE IN app.module.ts-->
+      </div>
+    </div>
+    <div class='row'>
+      <div class='col-md-6'>
+        <h4>Filtered by: {{listFilter}}</h4> <!-- shows user what they filtered by-->
+      </div>
+    </div>
+    <div class='table-responsive'>
+      <table class='table' *ngIf="products.length"> <!--ONLY SHOW THIS TABLE IF THERE IS SOMETHING IN PRODUCTS -->
+        <thead>
+          <tr>
+            <th> <!--This is header and where the button is to get image-->
+              <button class='btn btn-primary'
+                    (click) = 'toggleImage()'> <!--when button clicked: toggleImage method called(just flips the showImage property)-->
+                {{showImage ? 'Hide' : 'Show'}} Image <!--TERNNARY IF in JS(if showImage true print hide, if false print show)-->
+              </button>
+            </th>
+            <th>Product</th>
+            <th>Code</th>
+            <th>Available</th>
+            <th>Price</th>
+            <th>5 Star Rating</th>
+          </tr>
+        </thead>
+        <tbody> <!--body where the products are-->
+            <tr *ngFor="let product of filteredProducts"> <!--LOOOOP put the loop in the table row(each product gets a row), filteredProducts was set in the setter method-->
+              <td>                      <!--ONLY RUN THE IMAGE tab IF showImage property is TRUE (SO HIDE IMAGES IF showImage is true)-->
+                <img *ngIf= 'showImage'
+                      [src] = 'product.imageUrl'
+                      [title] = 'product.productName'
+                      [style.width.px] = 'imageWidth'
+                      [style.margin.px] = 'imageMargin'> <!--imageWidth and margin ARE CLASS PROPERTIES, SETTING HOW BIG IMAGES ARE-->
+                        <!--style.margin.px and width are all properties of the image-->
+
+              </td><!--image-->
+              <td>{{product.productName}}</td> <!--name is shown in array-->
+              <td>{{product.productCode | lowercase | convertToSpaces: '-'}}</td> <!--PIPE: makes productCode lowercaser before showing-->
+              <td>{{product.releaseDate}}</td>
+              <td>{{product.price | currency : 'USD' : 'symbol' : '1.2-2'}}</td>
+              <td>
+                <pm-star [rating]="product.starRating"
+                  (ratingClicked)="onRatingClicked($event)">
+                  <!--!!!BINDING TO @Input() rating, SETTING rating to value WE WANT TO PASS!!! -->
+                  <!--now product.starRating is bound to @Input() rating IN star.component.ts-->
+
+                  <!--ratingClicked: name of event prodicuct-list.compononent.ts is listening to from star.component.ts
+                        once it hears it: onRatingClicked() method is called
+                        $event: passing data that the event called ot the onRatingClicked() method
+                  -->
+              </pm-star>
+            </td> <!--NESTING the star.component as DIRECTIVE here to SHOW STARS-->
+            </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+

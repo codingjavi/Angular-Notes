@@ -1,0 +1,13 @@
+<!--THIS IS HOW OUR STARS SHOW (WE'RE PUTTING THIS AS A DIRECTIVE <pm-stars> in product-list.component.html bc THATS out container file)-->
+<div class="crop"
+     [style.width.px]="cropWidth"
+     [title]="rating"
+     (click) = 'onClick()'> <!--BINDING CLICK on stars to onClick() methos-->
+  <div style="width: 75px">
+    <span class="fa fa-star"></span> <!--using font awesome star icon to display stars (stars are 75 pixels, cropWidth: can make partial stars: 4.3)-->
+    <span class="fa fa-star"></span> <!--[title]: property binding(display numeric rating value): SO NEED cropWidth and rating PROPERTIES from star.Component-->
+    <span class="fa fa-star"></span>
+    <span class="fa fa-star"></span>
+    <span class="fa fa-star"></span>
+  </div>
+</div>
