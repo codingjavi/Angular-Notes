@@ -1,6 +1,10 @@
-# Apm
+# Angular Notes
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.3.
+These are the notes I took when I was learning Angular for my internship with Fidelity Investments. This is a little inventory store website where users are able to find their desired products. This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.3.
+
+## Features
+- Users are able to show or hide images
+- There is a search bar that shows up any products with names similar to the user input
 
 ## Development server
 
